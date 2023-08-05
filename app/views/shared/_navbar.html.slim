@@ -1,0 +1,8 @@
+nav.navbar.bg-body-tertiary
+  .container-fluid
+    a.navbar-brand href=root_path Home
+    ul.navbar-nav
+      li.nav-item.d-flex.column-gap-2
+        - if current_user
+          = link_to "Edit Profile", edit_user_path(current_user), class: "nav-link"
+          = link_to "Logout", signout_path, class: "nav-link"

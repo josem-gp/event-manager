@@ -1,8 +1,9 @@
-h1 Welcome to the Event Manager
-
-- if current_user
-  p You are logged in as: #{current_user.email}
-  = link_to "Logout", signout_path
-- else
-  = button_to "/auth/google_oauth2", method: :post, data: { turbo: false } do
-    = image_tag asset_path("btn_google_signin_dark.png"), alt: "Login with Google Omniauth"
+.container.mt-5.w-50.text-center
+  - if current_user
+    h1 Welcome #{current_user.first_name} #{current_user.last_name}
+  - else
+    h1 Welcome to the Event Manager
+    h5.alert.alert-primary.mt-5 
+      | Please sign in to proceed
+      = button_to "/auth/google_oauth2", method: :post, data: { turbo: false }, class: "login-cta" do
+        = image_tag asset_path("btn_google_signin_dark.png"), alt: "Login with Google Omniauth", class: "img-fluid"
