@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(auth)
     if user.present?
       session[:user_id] = user.id
-      redirect_to root_path, notice: 'Logged in!'
+      redirect_to root_path, notice: t('sessions.logged_in')
     else
       redirect_to new_session_path, notice: "#{auth.info.email} is not authorized."
     end
@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path, notice: 'Logged out!'
+    redirect_to root_path, notice: t('sessions.logged_out')
   end
 
   private

@@ -32,3 +32,6 @@
 en:
   users:
     alphabetic_format: "only allows letters"
+  sessions:
+    logged_in: 'Logged in!'
+    logged_out: 'Logged out!'
