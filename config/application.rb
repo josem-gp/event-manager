@@ -15,8 +15,10 @@ module EventManager
     #
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.time_zone = ENV.fetch('TZ', 'Asia/Tokyo')
+    # /lib modules were not loaded automatically so I added this fix:
+    # https://stackoverflow.com/questions/1073076/rails-lib-modules-and
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end
