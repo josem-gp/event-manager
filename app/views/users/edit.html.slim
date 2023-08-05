@@ -1,0 +1,18 @@
+.container.mt-5.w-25
+  = render 'shared/alert_errors'
+
+  h1 Edit Profile
+  = form_with(model: current_user, url: user_path(current_user), method: :patch) do |form|
+    .mb-3
+      label.form-label for="userFirstName" First name
+      = form.text_field :first_name, class: "form-control", id: "userFirstName"
+
+    .mb-3
+      label.form-label for="userLastName" Last name
+      = form.text_field :last_name, class: "form-control", id: "userLastName"
+
+    .mb-3
+      label.form-label for="userEmail" Email address
+      = form.text_field :email, class: "form-control", id: "userEmail", disabled: true
+    
+    = form.submit "Submit", class: "btn btn-primary"

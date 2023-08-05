@@ -1,0 +1,5 @@
+- if flash.now[:alert].present?
+  h4.alert-text.text-danger Errors
+  .alert.alert-danger
+    - flash.now[:alert].each do |error|
+      li= error

@@ -7,4 +7,5 @@ Rails.application.routes.draw do
 
   resources :sessions, only: %i(create destroy)
   resources :home, only: %i(index)
+  resources :users, only: %i(edit update)
 end

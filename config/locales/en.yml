@@ -32,6 +32,7 @@
 en:
   users:
     alphabetic_format: "only allows letters"
+    successful_update: "Profile updated successfully."
   sessions:
     logged_in: 'Logged in!'
     logged_out: 'Logged out!'
