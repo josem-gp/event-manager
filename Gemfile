@@ -34,10 +34,10 @@ gem 'sidekiq', '~> 4.1', '>= 4.1.2'
 gem 'omniauth-google-oauth2'
 
 # Provide mitigation against CVE-2015-9284 (CSRF when using OmniAuth)
-gem 'omniauth-rails_csrf_protection', '~> 1.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'
 
 # Slim is a template language to reduce the syntax to the essential parts
-gem 'slim', '~> 3.0', '>= 3.0.6'
+gem 'slim', '~> 5.1', '>= 5.1.1'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
