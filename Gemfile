@@ -30,6 +30,15 @@ gem "jbuilder"
 # Sidekiq gem for background job processing
 gem 'sidekiq', '~> 4.1', '>= 4.1.2'
 
+# For Google OAuth authentication
+gem 'omniauth-google-oauth2'
+
+# Provide mitigation against CVE-2015-9284 (CSRF when using OmniAuth)
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
+
+# Slim is a template language to reduce the syntax to the essential parts
+gem 'slim', '~> 3.0', '>= 3.0.6'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

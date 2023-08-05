@@ -1,0 +1,8 @@
+h1 Welcome to the Event Manager
+
+- if current_user
+  p You are logged in as: #{current_user.email}
+  = link_to "Logout", signout_path
+- else
+  = button_to "/auth/google_oauth2", method: :post, data: { turbo: false } do
+    = image_tag asset_path("btn_google_signin_dark.png"), alt: "Login with Google Omniauth"
