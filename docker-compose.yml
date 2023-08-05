@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/sh -c "rm -f /myapp/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/myapp
+    environment:
+      TZ: Asia/Tokyo
+      RAILS_ENV: ${RAILS_ENV:-development}
+      GMAIL_SMTP_USER: ${GMAIL_SMTP_USER}
+      GMAIL_SMTP_PASSWORD: ${GMAIL_SMTP_PASSWORD}
+      APP_NAME: ${APP_NAME:-EventManager}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+    depends_on:
+      - db
+      - redis
+
+  redis:
+    image: redis
+    command: redis-server
+    ports:
+      - "6379:6379"
+
+  sidekiq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bundle exec sidekiq
+    volumes:
+      - .:/myapp
+    environment:
+      RAILS_ENV: ${RAILS_ENV:-development}
+      GMAIL_SMTP_USER: ${GMAIL_SMTP_USER}
+      GMAIL_SMTP_PASSWORD: ${GMAIL_SMTP_PASSWORD}
+      APP_NAME: ${APP_NAME:-EventManager}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres_data:
