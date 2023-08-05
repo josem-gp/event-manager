@@ -14,7 +14,8 @@ class User < ApplicationRecord
   ## https://github.com/rails/rails/pull/46105?ref=akshaykhot.com
   attr_readonly :email
   validates :first_name, :last_name, presence: true
-  validates :first_name, :last_name, format: { with: ALPHABETIC_REGEX, message: :alphabetic_format }, on: :update
+  validates :first_name, :last_name, format: { with: ALPHABETIC_REGEX, message: I18n.t('users.alphabetic_format') },
+                                     on: :update
 
   # If user does not exist, create it
   def self.from_omniauth(auth)
