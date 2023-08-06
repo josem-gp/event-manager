@@ -1,0 +1,29 @@
+.container.mt-5.w-25
+  = render 'shared/alert_errors'
+
+  h2 Sign Up
+
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form|
+    .mb-3
+        label.form-label for="userFirstName" First name
+        = form.text_field :first_name, class: "form-control", id: "userFirstName", autofocus: true, autocomplete: "email"
+    
+    .mb-3
+        label.form-label for="userLastName" Last name
+        = form.text_field :last_name, class: "form-control", id: "userLastName", autofocus: true, autocomplete: "email"
+
+    .mb-3
+        label.form-label for="userEmail" Email
+        = form.email_field :email, class: "form-control", id: "userEmail", autofocus: true, autocomplete: "email"
+
+    .mb-3
+        label.form-label for="userPassword" Password
+        = form.password_field :password, class: "form-control", id: "userPassword", autocomplete: "new-password"
+    
+    .mb-3
+        label.form-label for="userPasswordConfirmation" Password confirmation
+        = form.password_field :password_confirmation, class: "form-control", id: "userPasswordConfirmation", autocomplete: "new-password"
+
+    = form.submit "Sign up", class: "btn btn-primary"
+
+  = render "devise/shared/links"
