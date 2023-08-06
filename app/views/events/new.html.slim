@@ -1,0 +1,22 @@
+.container.mt-5.w-25
+  = render 'shared/alert_errors'
+
+  h1 Create Event
+  = form_with(model: @event, url: events_path, method: :post) do |form|
+    .mb-3
+      label.form-label for="eventTitle" Title
+      = form.text_field :title, class: "form-control", id: "eventTitle"
+
+    .mb-3
+      label.form-label for="eventDescription" Description
+      = form.text_field :description, class: "form-control", id: "eventDescription"
+
+    .mb-3
+      label.form-label for="eventDate" Date
+      = form.datetime_local_field :date, class: "form-control", id: "eventDate"
+    
+    .mb-3
+      label.form-label for="eventEmails" Invitees' Emails (comma-separated)
+      = form.text_field :invitees_emails, class: "form-control", id: "eventEmails"
+    
+    = form.submit "Submit", class: "btn btn-primary"

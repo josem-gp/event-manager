@@ -8,5 +8,5 @@ Rails.application.routes.draw do
 
   resources :home, only: :index
   resources :users, only: %i(edit update)
-  resources :events, except: :destroy
+  resources :events, only: %i(new create show)
 end

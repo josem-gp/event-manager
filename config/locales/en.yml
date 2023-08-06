@@ -36,3 +36,5 @@ en:
   sessions:
     logged_in: 'Logged in!'
     logged_out: 'Logged out!'
+  events:
+    successful_creation: "Event created successfully."
