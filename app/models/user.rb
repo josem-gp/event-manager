@@ -11,8 +11,10 @@ class User < ApplicationRecord
   has_many :created_events, foreign_key: :creator_id, class_name: "Event", inverse_of: :creator, dependent: :destroy
   has_many :invitees, dependent: :destroy
   has_many :events, through: :invitees
-  has_many :sent_invitations, foreign_key: :sender_id, inverse_of: :sender, dependent: :destroy
-  has_many :received_invitations, foreign_key: :recipient_id, inverse_of: :recipient, dependent: :nullify
+  has_many :sent_invitations, foreign_key: :sender_id, class_name: "Invitation", inverse_of: :sender,
+                              dependent: :destroy
+  has_many :received_invitations, foreign_key: :recipient_id, class_name: "Invitation", inverse_of: :recipient,
+                                  dependent: :nullify
 
   # Validations
   validates :email, presence: true, uniqueness: true

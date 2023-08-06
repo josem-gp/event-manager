@@ -1,0 +1,18 @@
+.table-responsive
+  table.table.table-bordered
+    thead
+      tr
+       - (0..6).each do |day|
+          th.text-center 
+            = Date::DAYNAMES.rotate(1)[day]
+            br
+    tbody
+      tr
+        - (1..7).each do |day|
+          td
+            - events_for_day = @all_events.select { |event| event.date.strftime('%u').to_i == day }
+            - events_for_day.each do |event|
+              .card.mt-3
+                = link_to event_path(event), class: "nav-link"
+                  .card-header
+                    p = event.title
