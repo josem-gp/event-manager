@@ -24,6 +24,7 @@ services:
       GMAIL_SMTP_USER: ${GMAIL_SMTP_USER}
       GMAIL_SMTP_PASSWORD: ${GMAIL_SMTP_PASSWORD}
       APP_NAME: ${APP_NAME:-EventManager}
+      APP_URL: ${APP_URL:-http://localhost:3000/}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379}
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
@@ -49,6 +50,7 @@ services:
       GMAIL_SMTP_USER: ${GMAIL_SMTP_USER}
       GMAIL_SMTP_PASSWORD: ${GMAIL_SMTP_PASSWORD}
       APP_NAME: ${APP_NAME:-EventManager}
+      APP_URL: ${APP_URL:-http://localhost:3000/}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379}
     depends_on:
       - db

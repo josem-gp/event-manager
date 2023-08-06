@@ -10,9 +10,13 @@ class Event < ApplicationRecord
   after_validation :single_event_per_date_and_time, on: :create
 
   def send_invitations(invitees_emails)
-    # send invitation mailer (if user accepts, they become an Invitee)
-
-    # enqueue job to disable invitation after a day
+    invitees_emails.split(",").each do |invitee|
+      # send invitation mailer (if user accepts, they become an Invitee)
+      EventInvitationMailer.with(recipient: invitee, sender: current_user,
+                                 url: invitation.url).send_invitation.deliver_later
+      # enqueue job to disable invitation after a day
+      DisableInvitationJob.set(wait: 1.day).perform_later(invitation:)
+    end
   end
 
   private
