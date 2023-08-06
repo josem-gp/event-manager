@@ -13,11 +13,6 @@
             - events_for_day = @all_events.select { |event| event.date.strftime('%u').to_i == day }
             - events_for_day.each do |event|
               .card.mt-3
-                .card-header
-                  h5.card-title = event.title
-                .card-body
-                  p.card-text = "Day: #{event.date.strftime('%B')} #{event.date.day}, #{event.date.strftime('%A')}"
-                  p.card-text = "Time: #{event.date.strftime('%I:%M %p')} to #{(event.date + event.time.minutes).strftime('%I:%M %p')}"
-                  p.card-text = "Created by: #{event.creator.first_name} #{event.creator.last_name}"
-                  - event.invitees.each do |invitee|
-                    p.card-text = "Invitee: #{invitee.user.first_name} #{invitee.user.last_name}"
+                = link_to event_path(event), class: "nav-link"
+                  .card-header
+                    p = event.title

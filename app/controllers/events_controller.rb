@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
   before_action :set_new_event, only: %i[new create]
+  before_action :find_event, only: :show
 
+  def show; end
   def new; end
 
   def create
@@ -16,6 +18,10 @@ class EventsController < ApplicationController
 
   def set_new_event
     @event = Event.new
+  end
+
+  def find_event
+    @event = Event.find(params[:id])
   end
 
   def save_event

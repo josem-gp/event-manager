@@ -1,0 +1,11 @@
+.container.mt-5
+  .card
+    .card-header
+      h2 = @event.title
+    .card-body
+      p.card-text = "Description: #{@event.description}"
+      p.card-text = "Day: #{@event.date.strftime('%B')} #{@event.date.day}, #{@event.date.strftime('%A')}"
+      p.card-text = "Time: #{@event.date.strftime('%I:%M %p')} to #{(@event.date + @event.time.minutes).strftime('%I:%M %p')}"
+      p.card-text = "Created by: #{@event.creator.first_name} #{@event.creator.last_name}"
+      - @event.invitees.each do |invitee|
+        p.card-text = "Invitee: #{invitee.user.first_name} #{invitee.user.last_name}"
