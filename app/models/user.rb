@@ -2,11 +2,11 @@ class User < ApplicationRecord
   ALPHABETIC_REGEX = /\A[a-zA-Z]+\z/
 
   # Associations
-  has_many :events_as_creator, foreign_key: :creator_id, class_name: "Event", inverse_of: :creator, dependent: :destroy
+  has_many :created_events, foreign_key: :creator_id, class_name: "Event", inverse_of: :creator, dependent: :destroy
   has_many :invitees, dependent: :destroy
   has_many :events, through: :invitees
-  has_many :invitations_as_sender, foreign_key: :sender_id, inverse_of: :sender, dependent: :destroy
-  has_many :invitations_as_recipient, foreign_key: :recipient_id, inverse_of: :recipient, dependent: :nullify
+  has_many :sent_invitations, foreign_key: :sender_id, inverse_of: :sender, dependent: :destroy
+  has_many :received_invitations, foreign_key: :recipient_id, inverse_of: :recipient, dependent: :nullify
 
   # Validations
   validates :email, presence: true, uniqueness: true
