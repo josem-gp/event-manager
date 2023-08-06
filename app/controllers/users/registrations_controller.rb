@@ -6,14 +6,21 @@ module Users
     # before_action :configure_account_update_params, only: [:update]
 
     # GET /resource/sign_up
-    # def new
-    #   super
-    # end
+    def new
+      super
+    end
 
     # POST /resource
-    # def create
-    #   super
-    # end
+    def create
+      build_resource(sign_up_params)
+
+      if resource.valid?
+        super
+      else
+        flash_errors(resource)
+        render :new, status: :unprocessable_entity, content_type: "text/html"
+      end
+    end
 
     # GET /resource/edit
     # def edit

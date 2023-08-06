@@ -4,6 +4,6 @@
   - else
     h1 Welcome to the Event Manager
     h5.alert.alert-primary.mt-5 
-      | Please sign in to proceed
-      = button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false }, class: "login-cta" do
-        = image_tag asset_path("btn_google_signin_dark.png"), alt: "Login with Google Omniauth", class: "img-fluid"
+      | Please 
+      = link_to "sign in", new_user_session_path, class: "alert-link"
+      |  to proceed

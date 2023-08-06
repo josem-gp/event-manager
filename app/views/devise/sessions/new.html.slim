@@ -1,0 +1,17 @@
+.container.mt-5.w-25
+  = render 'shared/alert_errors'
+
+  h2 Log in
+
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |form|
+    .mb-3
+        label.form-label for="userEmail" Email
+        = form.email_field :email, class: "form-control", id: "userEmail", autocomplete: "email"
+
+    .mb-3
+        label.form-label for="userPassword" Password
+        = form.password_field :password, class: "form-control", id: "userPassword", autocomplete: "current-password"
+
+    = form.submit "Log in", class: "btn btn-primary"
+
+  = render "devise/shared/links"
