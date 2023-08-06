@@ -17,6 +17,7 @@ class Event < ApplicationRecord
 
   private
 
+  # Does not allow the creator to create another event during the same day and timeframe
   def single_event_per_date_and_time
     return if errors.present?
 
