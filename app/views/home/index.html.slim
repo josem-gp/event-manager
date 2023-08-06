@@ -1,6 +1,9 @@
 .container.mt-5.w-50.text-center
   - if current_user
     h1 Welcome #{current_user.first_name} #{current_user.last_name}
+    = render "shared/dashboard"
+
+    = link_to "Create New Event", new_event_path, class: "btn btn-primary"
   - else
     h1 Welcome to the Event Manager
     h5.alert.alert-primary.mt-5 
