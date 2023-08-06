@@ -39,6 +39,9 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'
 # Slim is a template language to reduce the syntax to the essential parts
 gem 'slim', '~> 5.1', '>= 5.1.1'
 
+# Flexible authentication solution for Rails with Warden
+gem 'devise', '~> 4.9', '>= 4.9.2'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
