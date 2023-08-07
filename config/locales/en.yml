@@ -38,5 +38,6 @@ en:
     logged_out: 'Logged out!'
   events:
     successful_creation: "Event created successfully."
+    not_found: "Event not found"
   invitations:
     greetings: "You have been invited to an event!"

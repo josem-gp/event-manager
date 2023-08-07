@@ -21,8 +21,6 @@ services:
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: ${RAILS_ENV:-development}
-      GMAIL_SMTP_USER: ${GMAIL_SMTP_USER}
-      GMAIL_SMTP_PASSWORD: ${GMAIL_SMTP_PASSWORD}
       APP_NAME: ${APP_NAME:-EventManager}
       APP_URL: ${APP_URL:-http://localhost:3000/}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379}
@@ -47,8 +45,6 @@ services:
       - .:/myapp
     environment:
       RAILS_ENV: ${RAILS_ENV:-development}
-      GMAIL_SMTP_USER: ${GMAIL_SMTP_USER}
-      GMAIL_SMTP_PASSWORD: ${GMAIL_SMTP_PASSWORD}
       APP_NAME: ${APP_NAME:-EventManager}
       APP_URL: ${APP_URL:-http://localhost:3000/}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379}

@@ -4,8 +4,23 @@
       h2 = @event.title
     .card-body
       p.card-text = "Description: #{@event.description}"
-      p.card-text = "Day: #{@event.date.strftime('%B')} #{@event.date.day}, #{@event.date.strftime('%A')}"
-      p.card-text = "Time: #{@event.date.strftime('%I:%M %p')} to #{(@event.date + @event.time.minutes).strftime('%I:%M %p')}"
-      p.card-text = "Created by: #{@event.creator.first_name} #{@event.creator.last_name}"
-      - @event.invitees.each do |invitee|
-        p.card-text = "Invitee: #{invitee.user.first_name} #{invitee.user.last_name}"
+      p.card-text = "Day: #{formatted_event_date(@event.date)}, #{event_weekday(@event.date)}"
+      p.card-text = "Time: #{event_time(@event.date)} to #{event_time(@event.date + @event.time.minutes)}"
+      p.card-text = "Created by: #{creator_full_name(@event.creator)}"
+      - if show_invitees?
+        - if @event.invitees.count == 0
+          p.card-text = "There are no invitees"
+        - else
+          - @event.invitees.each do |invitee|
+            p.card-text = "Invitee: #{invitee_full_name(invitee.user)}"
+      - else
+        p.card-text = "Number of invitees: #{@event.invitees.count}"
+
+      -if is_invited? && !invitation_expired?
+        - if @invitation.pending?
+          = button_to 'Accept', accept_event_invitation_path(@event, @invitation), method: :patch, class: 'btn btn-primary'
+          = button_to 'Reject', reject_event_invitation_path(@event, @invitation), method: :patch, class: 'btn btn-danger'
+        - elsif @invitation.accepted?
+          p.card-text = "Invitation accepted"
+        - elsif @invitation.denied?
+          p.card-text = "Invitation denied"

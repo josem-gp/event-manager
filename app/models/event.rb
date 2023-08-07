@@ -9,16 +9,6 @@ class Event < ApplicationRecord
   # We will only create events as per specification of the project
   after_validation :single_event_per_date_and_time, on: :create
 
-  def send_invitations(invitees_emails)
-    invitees_emails.split(",").each do |invitee|
-      # send invitation mailer (if user accepts, they become an Invitee)
-      EventInvitationMailer.with(recipient: invitee, sender: current_user,
-                                 url: invitation.url).send_invitation.deliver_later
-      # enqueue job to disable invitation after a day
-      DisableInvitationJob.set(wait: 1.day).perform_later(invitation:)
-    end
-  end
-
   private
 
   # Does not allow the creator to create another event during the same day and timeframe
@@ -29,7 +19,7 @@ class Event < ApplicationRecord
 
     existing_events = Event.where(
       creator:
-    ).where("date >= ? AND date <= ?", date, end_time)
+    ).where("(date, date + INTERVAL '60 MINUTE') OVERLAPS (?, ?)", date, end_time)
 
     errors.add(:base, "Another event already exists at this date and time") unless existing_events.empty?
   end

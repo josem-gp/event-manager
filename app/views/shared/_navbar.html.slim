@@ -3,6 +3,7 @@ nav.navbar.bg-body-tertiary
     a.navbar-brand href=root_path Home
     ul.navbar-nav
       li.nav-item.d-flex.column-gap-2
+        = link_to "See Invitations (one of each)", letter_opener_web_path, class: "nav-link"
         - if current_user
           = link_to "Edit Profile", edit_user_path(current_user), class: "nav-link"
           = button_to "Logout", destroy_user_session_path, class: "nav-link", method: :delete

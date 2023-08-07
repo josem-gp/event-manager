@@ -13,7 +13,19 @@ Rails.application.routes.draw do
 
   resources :home, only: :index
   resources :users, only: %i(edit update)
-  resources :events, only: %i(new create show)
+  resources :events, only: %i(new create show) do
+    resources :invitations, only: [] do
+      member do
+        patch :accept
+        patch :reject
+      end
+    end
+  end
+
   
   mount Sidekiq::Web => '/sidekiq'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
