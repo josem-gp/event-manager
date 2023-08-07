@@ -7,7 +7,7 @@
       p.card-text = "Day: #{formatted_event_date(@event.date)}, #{event_weekday(@event.date)}"
       p.card-text = "Time: #{event_time(@event.date)} to #{event_time(@event.date + @event.time.minutes)}"
       p.card-text = "Created by: #{creator_full_name(@event.creator)}"
-      - if show_invitees?
+      - if show_invitees?(@event, @is_an_invitee)
         - if @event.invitees.count == 0
           p.card-text = "There are no invitees"
         - else
@@ -16,7 +16,7 @@
       - else
         p.card-text = "Number of invitees: #{@event.invitees.count}"
 
-      -if is_invited? && !invitation_expired?
+      -if invited?(@event) && !invitation_expired?(@invitation)
         - if @invitation.pending?
           = button_to 'Accept', accept_event_invitation_path(@event, @invitation), method: :patch, class: 'btn btn-primary'
           = button_to 'Reject', reject_event_invitation_path(@event, @invitation), method: :patch, class: 'btn btn-danger'

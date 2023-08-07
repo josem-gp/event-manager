@@ -2,8 +2,8 @@ class EventsController < ApplicationController
   before_action :set_new_event, only: %i[new create]
   before_action :find_event_or_redirect, only: :show
 
-  def show 
-    @is_an_invitee = current_user.is_an_invitee?(@event)
+  def show
+    @is_an_invitee = current_user.an_invitee?(@event)
     @invitation = current_user.received_invitations.find_by(event: @event)
   end
 
@@ -25,9 +25,9 @@ class EventsController < ApplicationController
   end
 
   def find_event_or_redirect
-    unless @event = Event.find_by(id: params[:id])
-      redirect_to root_path, error: t('events.not_found')
-    end
+    return if (@event = Event.find_by(id: params[:id]))
+
+    redirect_to root_path, error: t('events.not_found')
   end
 
   def save_event

@@ -35,7 +35,7 @@ class User < ApplicationRecord
     end
   end
 
-  def is_an_invitee?(event)
-    Invitee.find_by(user: self, event: event).present?
+  def an_invitee?(event)
+    Invitee.find_by(user: self, event:).present?
   end
 end

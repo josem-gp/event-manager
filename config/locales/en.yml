@@ -34,10 +34,13 @@ en:
     alphabetic_format: "only allows letters"
     successful_update: "Profile updated successfully."
   sessions:
-    logged_in: 'Logged in!'
-    logged_out: 'Logged out!'
+    logged_in: "Logged in!"
+    logged_out: "Logged out!"
   events:
     successful_creation: "Event created successfully."
     not_found: "Event not found"
   invitations:
     greetings: "You have been invited to an event!"
+    accepted: "Invitation accepted!"
+    denied: "Invitation denied."
+    error_when_accepting: "There was a problem accepting the invitation."

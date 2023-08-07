@@ -6,15 +6,15 @@ class InvitationsController < ApplicationController
     invitee = Invitee.new(user: current_user, event: @event)
     if invitee.save
       @invitation.update(status: :accepted)
-      redirect_to event_path(@event), notice: 'Invitation accepted!'
+      redirect_to event_path(@event), notice: t('invitations.accepted')
     else
-      redirect_to event_path(@event), notice: 'There was a problem accepting the invitation.'
+      redirect_to event_path(@event), notice: t('invitations.error_when_accepting')
     end
   end
 
   def reject
     @invitation.update(status: :denied)
-    redirect_to event_path(@event), notice: 'Invitation denied.'
+    redirect_to event_path(@event), notice: t('invitations.denied')
   end
 
   private
