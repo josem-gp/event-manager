@@ -34,4 +34,8 @@ class User < ApplicationRecord
       user.email = auth.info.email
     end
   end
+
+  def an_invitee?(event)
+    Invitee.find_by(user: self, event:).present?
+  end
 end

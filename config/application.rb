@@ -20,5 +20,7 @@ module EventManager
     # /lib modules were not loaded automatically so I added this fix:
     # https://stackoverflow.com/questions/1073076/rails-lib-modules-and
     config.autoload_paths += %W(#{config.root}/lib)
+    # Configuration to enqueue jobs using Sidekiq
+    config.active_job.queue_adapter = :sidekiq
   end
 end

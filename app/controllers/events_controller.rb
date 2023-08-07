@@ -1,8 +1,12 @@
 class EventsController < ApplicationController
   before_action :set_new_event, only: %i[new create]
-  before_action :find_event, only: :show
+  before_action :find_event_or_redirect, only: :show
 
-  def show; end
+  def show
+    @is_an_invitee = current_user.an_invitee?(@event)
+    @invitation = current_user.received_invitations.find_by(event: @event)
+  end
+
   def new; end
 
   def create
@@ -20,20 +24,23 @@ class EventsController < ApplicationController
     @event = Event.new
   end
 
-  def find_event
-    @event = Event.find(params[:id])
+  def find_event_or_redirect
+    return if (@event = Event.find_by(id: params[:id]))
+
+    redirect_to root_path, error: t('events.not_found')
   end
 
   def save_event
     @event.assign_attributes(event_params.except(:invitees_emails))
     @event.creator = current_user
 
-    if @event.save
-      @event.send_invitations(event_params[:invitees_emails])
-      true
-    else
-      false
-    end
+    return false unless @event.save
+
+    # After we save the event, we send the invitations if invitees exist
+    return true if event_params[:invitees_emails].blank?
+
+    InvitationService.new(@event, event_params[:invitees_emails]).call
+    true
   end
 
   def event_params

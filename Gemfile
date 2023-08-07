@@ -80,6 +80,11 @@ group :development do
   # Static analysis security scanner for detecting vulnerabilities
   gem 'brakeman', require: false
 
+  # Preview email in the default browser instead of sending it
+  gem "letter_opener"
+  # Gives letter_opener an interface for browsing sent emails
+  gem 'letter_opener_web', '~> 2.0'
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
