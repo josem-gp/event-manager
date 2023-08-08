@@ -27,6 +27,11 @@ class Invitation < ApplicationRecord
     status == 'denied'
   end
 
+  def disable_invitation
+    self.expired = true
+    save
+  end
+
   private
 
   def set_expiration_date

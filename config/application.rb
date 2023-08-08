@@ -22,5 +22,8 @@ module EventManager
     config.autoload_paths += %W(#{config.root}/lib)
     # Configuration to enqueue jobs using Sidekiq
     config.active_job.queue_adapter = :sidekiq
+    # Using logger
+    Rails.logger = Logger.new(STDOUT)
+    config.logger = ActiveSupport::Logger.new("log/#{ENV["RAILS_ENV"]}.log")
   end
 end

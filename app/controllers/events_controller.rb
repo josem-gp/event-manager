@@ -39,7 +39,7 @@ class EventsController < ApplicationController
     # After we save the event, we send the invitations if invitees exist
     return true if event_params[:invitees_emails].blank?
 
-    InvitationService.new(@event, event_params[:invitees_emails]).call
+    Services::InvitationService.new(@event, event_params[:invitees_emails]).call
     true
   end
 
