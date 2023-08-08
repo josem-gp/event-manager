@@ -33,14 +33,18 @@ en:
   users:
     alphabetic_format: "only allows letters"
     successful_update: "Profile updated successfully."
+    error_when_updating: "Profile could not be updated successfully."
   sessions:
     logged_in: "Logged in!"
     logged_out: "Logged out!"
   events:
     successful_creation: "Event created successfully."
-    not_found: "Event not found"
+    error_when_creating: "Event could not be created successfully."
+    not_found: "Event not found."
   invitations:
     greetings: "You have been invited to an event!"
     accepted: "Invitation accepted!"
     denied: "Invitation denied."
     error_when_accepting: "There was a problem accepting the invitation."
+    error_when_rejecting: "There was a problem rejecting the invitation."
+    not_found: "Invitation not found."
