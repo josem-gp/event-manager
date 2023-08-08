@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     if current_user.update(user_params)
       redirect_to root_path, notice: t('users.successful_update')
     else
+      handle_resource_error(current_user, t('users.error_when_updating'))
       flash_errors(current_user)
       render :edit, status: :unprocessable_entity, content_type: "text/html"
     end

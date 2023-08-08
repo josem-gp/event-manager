@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_new_event, only: %i[new create]
-  before_action :find_event_or_redirect, only: :show
+  before_action :find_event, only: :show
 
   def show
     @is_an_invitee = current_user.an_invitee?(@event)
@@ -13,6 +13,7 @@ class EventsController < ApplicationController
     if save_event
       redirect_to root_path, notice: t('events.successful_creation')
     else
+      handle_resource_error(@event, t('events.error_when_creating'))
       flash_errors(@event)
       render :new, status: :unprocessable_entity, content_type: 'text/html'
     end
@@ -24,9 +25,10 @@ class EventsController < ApplicationController
     @event = Event.new
   end
 
-  def find_event_or_redirect
-    return if (@event = Event.find_by(id: params[:id]))
-
+  def find_event
+    @event = Event.find(params[:id])
+  rescue ActiveRecord::RecordNotFound => e
+    log_error(e, t('events.not_found'))
     redirect_to root_path, error: t('events.not_found')
   end
 

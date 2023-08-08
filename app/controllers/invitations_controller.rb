@@ -8,6 +8,7 @@ class InvitationsController < ApplicationController
       @invitation.update(status: :accepted)
       redirect_to event_path(@event), notice: t('invitations.accepted')
     else
+      handle_resource_error(invitee, t('invitations.error_when_accepting'))
       redirect_to event_path(@event), notice: t('invitations.error_when_accepting')
     end
   end
@@ -21,9 +22,15 @@ class InvitationsController < ApplicationController
 
   def find_invitation
     @invitation = Invitation.find(params[:id])
+  rescue ActiveRecord::RecordNotFound => e
+    log_error(e, t('invitations.not_found'))
+    redirect_to root_path, error: t('invitations.not_found')
   end
 
   def find_event
     @event = Event.find(params[:event_id])
+  rescue ActiveRecord::RecordNotFound => e
+    log_error(e, t('events.not_found'))
+    redirect_to root_path, error: t('events.not_found')
   end
 end
