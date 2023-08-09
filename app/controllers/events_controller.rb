@@ -14,7 +14,6 @@ class EventsController < ApplicationController
       flash[:success] = t('events.successful_creation')
       redirect_to root_path
     else
-      handle_resource_error(@event, t('events.error_when_creating'))
       flash_errors(@event)
       render :new, status: :unprocessable_entity, content_type: 'text/html'
     end
