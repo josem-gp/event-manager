@@ -68,6 +68,9 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   # Used to easily generate fake data
   gem 'faker', '~> 3.2'
+  # rspec-rails is a testing framework for Rails 5+.
+  gem 'factory_bot_rails'
+  gem 'rspec-rails', '~> 6.0.3'
 end
 
 group :development do
@@ -85,6 +88,9 @@ group :development do
   # Gives letter_opener an interface for browsing sent emails
   gem 'letter_opener_web', '~> 2.0'
 
+  # Rspec command for spring
+  gem 'spring-commands-rspec'
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
@@ -97,4 +103,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  # To ensure a clean slate for testing
+  gem 'database_cleaner'
 end
