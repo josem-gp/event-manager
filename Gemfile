@@ -105,4 +105,6 @@ group :test do
   gem "webdrivers"
   # To ensure a clean slate for testing
   gem 'database_cleaner'
+  # One-liners to test common Rails functionality
+  gem 'shoulda-matchers', '~> 5.0'
 end
