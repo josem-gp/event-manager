@@ -18,12 +18,12 @@ class User < ApplicationRecord
 
   # Validations
   validates :email, presence: true, uniqueness: true
-  ## Starting version 7.1 and above, Rails will raise an error if you try to modify a readonly attribute
-  ## https://github.com/rails/rails/pull/46105?ref=akshaykhot.com
-  attr_readonly :email
   validates :first_name, :last_name, presence: true
   validates :first_name, :last_name, format: { with: ALPHABETIC_REGEX, message: I18n.t('users.alphabetic_format') },
                                      on: :update
+
+  # Callbacks
+  before_update :prevent_email_update
 
   # If user does not exist, create it
   def self.from_omniauth(auth)
@@ -37,5 +37,12 @@ class User < ApplicationRecord
 
   def an_invitee?(event)
     Invitee.find_by(user: self, event:).present?
+  end
+
+  private
+
+  def prevent_email_update
+    errors.add(:email, 'cannot be updated') if email_changed?
+    throw(:abort) if errors.present?
   end
 end
