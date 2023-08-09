@@ -6,6 +6,8 @@ class Event < ApplicationRecord
 
   # Validations
   validates :title, :date, :time, presence: true
+
+  # Callbacks
   # We will only create events as per specification of the project
   after_validation :single_event_per_date_and_time, on: :create
 
