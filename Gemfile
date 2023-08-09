@@ -70,7 +70,7 @@ group :development, :test do
   gem 'faker', '~> 3.2'
   # rspec-rails is a testing framework for Rails 5+.
   gem 'factory_bot_rails'
-  gem 'rspec-rails', '~> 6.0.1'
+  gem 'rspec-rails', '~> 6.0.3'
 end
 
 group :development do
