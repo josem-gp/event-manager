@@ -5,7 +5,7 @@ class InvitationsController < ApplicationController
   def accept
     invitee = Invitee.new(user: current_user, event: @event)
     if invitee.save
-      @invitation.update(status: :accepted)
+      @invitation.accepted!
       flash[:success] = t('invitations.accepted')
     else
       handle_resource_error(invitee, t('invitations.error_when_accepting'))
@@ -15,7 +15,7 @@ class InvitationsController < ApplicationController
   end
 
   def reject
-    @invitation.update(status: :denied)
+    @invitation.denied!
     flash[:success] = t('invitations.denied')
     redirect_to event_path(@event)
   end
