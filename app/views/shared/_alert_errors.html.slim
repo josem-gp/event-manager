@@ -1,8 +1,8 @@
-- if flash.now[:alert].present?
+- if flash.now[:validation_error].present?
   h4.alert-text.text-danger Errors
   .alert.alert-danger
-    - if flash.now[:alert].is_a?(Array)
-      - flash.now[:alert].each do |error|
+    - if flash.now[:validation_error].is_a?(Array)
+      - flash.now[:validation_error].each do |error|
         li= error
     - else
-      li= flash.now[:alert]
+      li= flash.now[:validation_error]

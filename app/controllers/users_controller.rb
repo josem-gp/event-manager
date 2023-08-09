@@ -3,7 +3,8 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      redirect_to root_path, notice: t('users.successful_update')
+      flash[:success] = t('users.successful_update')
+      redirect_to root_path
     else
       handle_resource_error(current_user, t('users.error_when_updating'))
       flash_errors(current_user)
