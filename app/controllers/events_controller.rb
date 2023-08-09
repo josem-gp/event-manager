@@ -11,9 +11,9 @@ class EventsController < ApplicationController
 
   def create
     if save_event
-      redirect_to root_path, notice: t('events.successful_creation')
+      flash[:success] = t('events.successful_creation')
+      redirect_to root_path
     else
-      handle_resource_error(@event, t('events.error_when_creating'))
       flash_errors(@event)
       render :new, status: :unprocessable_entity, content_type: 'text/html'
     end
@@ -29,7 +29,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   rescue ActiveRecord::RecordNotFound => e
     log_error(e, t('events.not_found'))
-    redirect_to root_path, error: t('events.not_found')
+    flash[:error] = t('events.not_found')
+    redirect_to root_path
   end
 
   def save_event

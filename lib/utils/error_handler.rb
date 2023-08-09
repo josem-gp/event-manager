@@ -1,7 +1,7 @@
 module Utils
   module ErrorHandler
     def flash_errors(resource)
-      flash.now[:alert] = resource.errors.full_messages
+      flash.now[:validation_error] = resource.errors.full_messages
     end
 
     def handle_resource_error(resource, message)
