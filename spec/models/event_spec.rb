@@ -24,7 +24,9 @@ RSpec.describe Event, type: :model do
 
       context 'when overlapping event exists' do
         let(:existing_event) { create :event }
-        let(:overlapping_event) { build(:event, creator: existing_event.creator, date: existing_event.date + 30.minutes) }
+        let(:overlapping_event) do
+          build(:event, creator: existing_event.creator, date: existing_event.date + 30.minutes)
+        end
         it 'adds an error' do
           expect(overlapping_event).to be_invalid
           expect(overlapping_event.errors[:base]).to include("Another event already exists at this date and time")
