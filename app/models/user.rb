@@ -27,11 +27,10 @@ class User < ApplicationRecord
 
   # If user does not exist, create it
   def self.from_omniauth(auth)
+    return nil unless auth.respond_to?(:info) && auth.info.respond_to?(:email)
+
     where(email: auth.info.email).first_or_create do |user|
-      user.password = Devise.friendly_token[0, 20]
-      user.first_name = auth.info.first_name
-      user.last_name = auth.info.last_name
-      user.email = auth.info.email
+      initialize_user_from_auth(user, auth)
     end
   end
 
@@ -44,5 +43,12 @@ class User < ApplicationRecord
   def prevent_email_update
     errors.add(:email, 'cannot be updated') if email_changed?
     throw(:abort) if errors.present?
+  end
+
+  private_class_method def self.initialize_user_from_auth(user, auth)
+    user.password = Devise.friendly_token[0, 20]
+    user.first_name = auth.info.first_name
+    user.last_name = auth.info.last_name
+    user.email = auth.info.email
   end
 end
