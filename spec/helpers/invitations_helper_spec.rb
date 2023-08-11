@@ -5,15 +5,15 @@ RSpec.describe InvitationsHelper, type: :helper do
     let(:event) { create :event }
 
     context 'when current user is the creator' do
-      include_examples 'show invitees', true, false, true
+      it_behaves_like 'show invitees', true, false, true
     end
 
     context 'when current user is not the creator and is an invitee' do
-      include_examples 'show invitees', false, true, true
+      it_behaves_like 'show invitees', false, true, true
     end
 
     context 'when current user is not the creator and is not an invitee' do
-      include_examples 'show invitees', false, false, false
+      it_behaves_like 'show invitees', false, false, false
     end
   end
 

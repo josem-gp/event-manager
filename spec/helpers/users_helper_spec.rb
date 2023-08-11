@@ -10,11 +10,11 @@ RSpec.describe UsersHelper, type: :helper do
     end
 
     context 'when the user has a non-expired invitation for the event' do
-      include_examples 'invitation status', false, true
+      it_behaves_like 'invitation status', false, true
     end
 
     context 'when the user has an expired invitation for the event' do
-      include_examples 'invitation status', true, false
+      it_behaves_like 'invitation status', true, false
     end
 
     context 'when the user does not have an invitation for the event' do
