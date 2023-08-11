@@ -6,7 +6,7 @@ RSpec.describe UsersHelper, type: :helper do
 
   describe '#invited?' do
     before do
-      sign_in user
+      allow(helper).to receive(:current_user).and_return(user)
     end
 
     context 'when the user has a non-expired invitation for the event' do
