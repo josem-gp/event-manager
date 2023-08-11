@@ -68,9 +68,6 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   # Used to easily generate fake data
   gem 'faker', '~> 3.2'
-  # rspec-rails is a testing framework for Rails 5+.
-  gem 'factory_bot_rails'
-  gem 'rspec-rails', '~> 6.0.3'
 end
 
 group :development do
@@ -107,4 +104,8 @@ group :test do
   gem 'database_cleaner'
   # One-liners to test common Rails functionality
   gem 'shoulda-matchers', '~> 5.0'
+  # rspec-rails is a testing framework for Rails 5+.
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
+  gem 'rspec-rails', '~> 6.0.3'
 end
