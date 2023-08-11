@@ -70,6 +70,11 @@ RSpec.configure do |config|
 
   config.include Devise::Test::ControllerHelpers, type: :controller
 
+  OmniAuth.configure do |c|
+    c.test_mode = true
+    c.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(Faker::Omniauth.google)
+  end
+
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|
       with.test_framework :rspec

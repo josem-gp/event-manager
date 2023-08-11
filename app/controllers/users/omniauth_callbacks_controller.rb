@@ -28,11 +28,21 @@ module Users
     end
 
     def handle_failed_authentication
-      log_error(OmniauthError.new("Google OAuth2 authentication failed for email #{auth.info.email}."),
+      error_message = determine_error_message
+
+      log_error(OmniauthError.new(error_message),
                 OMNIAUTH_ERROR)
       flash[:error] =
-        t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."
-      redirect_to new_user_sessions_path
+        t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: error_message
+      redirect_to new_user_registration_path
+    end
+
+    def determine_error_message
+      if auth.respond_to?(:info) && auth.info.respond_to?(:email) && auth.info.email.present?
+        "Google OAuth2 authentication failed for email #{auth.info.email}."
+      else
+        "Authentication failed."
+      end
     end
   end
 end
