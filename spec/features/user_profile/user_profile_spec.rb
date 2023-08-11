@@ -3,10 +3,12 @@ require 'rails_helper'
 RSpec.feature 'User Profile Updates', type: :feature do
   let(:user) { create(:user) }
 
-  scenario 'User can update their first name and last name' do
+  before do
     login_as(user)
     visit edit_user_path(user)
+  end
 
+  scenario 'User can update their first name and last name' do
     new_first_name = 'NewFirstName'
     new_last_name = 'NewLastName'
 
@@ -19,9 +21,6 @@ RSpec.feature 'User Profile Updates', type: :feature do
   end
 
   scenario 'User profile form guards against invalid inputs' do
-    login_as(user)
-    visit edit_user_path(user)
-
     fill_in 'First name', with: ''
     fill_in 'Last name', with: ''
     click_button 'Submit'

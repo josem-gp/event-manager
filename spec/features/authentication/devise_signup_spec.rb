@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature 'Sign up with Devise', type: :feature do
-  scenario 'User can sign up successfully using Devise' do
+  before do
     visit new_user_registration_path
+  end
 
+  scenario 'User can sign up successfully using Devise' do
     fill_in "First name", with: "John"
     fill_in "Last name", with: "Doe"
     fill_in "Email", with: "john@example.com"
@@ -16,8 +18,6 @@ RSpec.feature 'Sign up with Devise', type: :feature do
   end
 
   scenario 'User signs up unsuccesfully using Devise' do
-    visit new_user_registration_path
-
     click_button "Sign up"
 
     expect(page).to have_current_path(user_registration_path)
