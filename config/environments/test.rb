@@ -53,7 +53,7 @@ Rails.application.configure do
   config.active_support.disallowed_deprecation_warnings = []
 
   # To adjust the log level
-  config.log_level = :info
+  config.log_level = :warn
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
