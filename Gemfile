@@ -68,6 +68,8 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   # Used to easily generate fake data
   gem 'faker', '~> 3.2'
+  # Gives letter_opener an interface for browsing sent emails
+  gem 'letter_opener_web', '~> 2.0'
 end
 
 group :development do
@@ -82,8 +84,6 @@ group :development do
 
   # Preview email in the default browser instead of sending it
   gem "letter_opener"
-  # Gives letter_opener an interface for browsing sent emails
-  gem 'letter_opener_web', '~> 2.0'
 
   # Rspec command for spring
   gem 'spring-commands-rspec'
