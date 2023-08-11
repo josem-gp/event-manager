@@ -3,9 +3,11 @@ require 'rails_helper'
 RSpec.feature 'Log in with Devise', type: :feature do
   let(:user) { create(:user) }
 
-  scenario 'User can log in successfully using Devise' do
+  before do
     visit new_user_session_path
+  end
 
+  scenario 'User can log in successfully using Devise' do
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password
     click_button "Log in"
@@ -15,8 +17,6 @@ RSpec.feature 'Log in with Devise', type: :feature do
   end
 
   scenario "User logs in unsuccesfully using Devise" do
-    visit new_user_session_path
-
     fill_in "Password", with: user.password
     click_button "Log in"
 

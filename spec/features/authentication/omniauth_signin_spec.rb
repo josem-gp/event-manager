@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.feature 'Sign in with OmniAuth', type: :feature do
-  scenario 'User can sign in using OmniAuth' do
+  before do
     visit new_user_session_path
+  end
 
+  scenario 'User can sign in using OmniAuth' do
     within('.d-flex.justify-content-center') do
       click_button('Login with Google Omniauth')
     end
@@ -14,8 +16,6 @@ RSpec.feature 'Sign in with OmniAuth', type: :feature do
 
   scenario 'User signs in unsuccesfully using OmniAuth' do
     OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
-
-    visit new_user_session_path
 
     within('.d-flex.justify-content-center') do
       click_button('Login with Google Omniauth')
