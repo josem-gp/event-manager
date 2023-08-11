@@ -8,7 +8,7 @@ RSpec.describe EventInvitationMailer, type: :mailer do
     let(:sender) { create(:user, email: 'sender@example.com') }
     let(:url) { 'https://example.com/events/135' }
 
-    let(:mail) { EventInvitationMailer.with(recipient: recipient, sender: sender, url: url).send_invitation }
+    let(:mail) { EventInvitationMailer.with(recipient:, sender:, url:).send_invitation }
 
     it 'renders the headers' do
       expect(mail.subject).to eq(I18n.t('invitations.greetings'))
