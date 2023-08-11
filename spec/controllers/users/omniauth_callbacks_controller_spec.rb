@@ -4,12 +4,8 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   describe '#google_oauth2' do
     context 'when user is successfully authenticated' do
       before do
-        request.env['devise.mapping'] = Devise.mappings[:user]
-        request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
-
         allow(controller).to receive(:sign_out_all_scopes)
-
-        get :google_oauth2
+        setup_mock_omniauth_valid_credentials
       end
 
       it 'signs out all scopes' do
@@ -28,11 +24,11 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
     context 'when user authentication fails' do
       before do
-        OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
-        request.env['devise.mapping'] = Devise.mappings[:user]
-        request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:google_oauth2]
+        setup_mock_omniauth_invalid_credentials
+      end
 
-        get :google_oauth2
+      after do
+        reset_mock_omniauth
       end
 
       it 'sets a flash error' do
