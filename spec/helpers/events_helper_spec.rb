@@ -17,7 +17,7 @@ RSpec.describe EventsHelper, type: :helper do
 
   describe '#event_time' do
     it 'returns a formatted time' do
-      time = Time.new(2023, 8, 15, 14, 30)
+      time = Time.zone.local(2023, 8, 15, 14, 30)
       expect(event_time(time)).to eq('02:30 PM')
     end
   end
