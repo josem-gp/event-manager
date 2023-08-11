@@ -7,7 +7,7 @@ RSpec.feature 'Log in with Devise', type: :feature do
     visit new_user_session_path
   end
 
-  scenario 'User can log in successfully using Devise' do
+  scenario 'User logs in successfully using Devise' do
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password
     click_button "Log in"
