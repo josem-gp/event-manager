@@ -5,7 +5,7 @@ RSpec.feature 'Sign in with OmniAuth', type: :feature do
     visit new_user_session_path
   end
 
-  scenario 'User can sign in using OmniAuth' do
+  scenario 'User signs in successfully using OmniAuth' do
     within('.d-flex.justify-content-center') do
       click_button('Login with Google Omniauth')
     end

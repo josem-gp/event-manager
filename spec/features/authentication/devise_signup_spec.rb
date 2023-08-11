@@ -5,7 +5,7 @@ RSpec.feature 'Sign up with Devise', type: :feature do
     visit new_user_registration_path
   end
 
-  scenario 'User can sign up successfully using Devise' do
+  scenario 'User signs up successfully using Devise' do
     fill_in "First name", with: "John"
     fill_in "Last name", with: "Doe"
     fill_in "Email", with: "john@example.com"
