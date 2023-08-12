@@ -16,13 +16,9 @@ RSpec.describe InvitationsController, type: :controller do
                                       .and change { invitation.reload.status }.to('accepted')
       end
 
-      it 'sets a flash success' do
+      it 'sets a flash success and redirects to event page' do
         post :accept, params: { id: invitation.id, event_id: event.id }
         expect(flash[:success]).to eq(I18n.t('invitations.accepted'))
-      end
-
-      it 'redirects to event page' do
-        post :accept, params: { id: invitation.id, event_id: event.id }
         expect(response).to redirect_to(event_path(event))
       end
     end
@@ -38,13 +34,9 @@ RSpec.describe InvitationsController, type: :controller do
         end.not_to change(Invitee, :count)
       end
 
-      it 'sets flash error' do
+      it 'sets flash error and redirects to event page' do
         post :accept, params: { id: invitation.id, event_id: event.id }
         expect(flash[:error]).to eq(I18n.t('invitations.error_when_accepting'))
-      end
-
-      it 'redirects to event page' do
-        post :accept, params: { id: invitation.id, event_id: event.id }
         expect(response).to redirect_to(event_path(event))
       end
     end

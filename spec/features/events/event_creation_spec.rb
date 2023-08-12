@@ -1,4 +1,3 @@
-# spec/features/event_creation_spec.rb
 require 'rails_helper'
 
 RSpec.feature 'Event Creation', type: :feature do

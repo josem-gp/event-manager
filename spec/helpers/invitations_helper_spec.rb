@@ -4,12 +4,16 @@ RSpec.describe InvitationsHelper, type: :helper do
   describe '#show_invitees?' do
     let(:event) { create :event }
 
-    context 'when current user is the creator' do
+    context 'when current user is only the creator' do
       it_behaves_like 'show invitees', true, false, true
     end
 
-    context 'when current user is not the creator and is an invitee' do
+    context 'when current user is only an invitee' do
       it_behaves_like 'show invitees', false, true, true
+    end
+
+    context 'when current user is both the creator and invitee' do
+      it_behaves_like 'show invitees', true, true, true
     end
 
     context 'when current user is not the creator and is not an invitee' do

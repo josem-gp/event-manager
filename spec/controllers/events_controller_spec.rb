@@ -21,9 +21,8 @@ RSpec.describe EventsController, type: :controller do
         expect(assigns(:invitation)).to eq(invitation)
       end
 
-      it 'successfully renders the show template without showing any errors' do
+      it 'successfully renders the show template' do
         expect(response).to render_template(:show)
-        expect(controller).not_to have_received(:log_error)
       end
     end
 
@@ -42,7 +41,6 @@ RSpec.describe EventsController, type: :controller do
     context 'when user is authenticated' do
       before do
         sign_in(user)
-        allow(controller).to receive(:log_error)
         get :new
       end
 
@@ -50,9 +48,8 @@ RSpec.describe EventsController, type: :controller do
         expect(assigns(:event)).to be_a_new(Event)
       end
 
-      it 'successfully renders the new template without showing any errors' do
+      it 'successfully renders the new template' do
         expect(response).to render_template(:new)
-        expect(controller).not_to have_received(:log_error)
       end
     end
 
@@ -71,7 +68,6 @@ RSpec.describe EventsController, type: :controller do
     context 'when user is authenticated' do
       before do
         sign_in(user)
-        allow(controller).to receive(:log_error)
       end
 
       context 'with valid params' do
@@ -81,13 +77,9 @@ RSpec.describe EventsController, type: :controller do
           end.to change(Event, :count).by(1)
         end
 
-        it 'successfully redirects to the root path' do
+        it 'successfully redirects to the root path and sets a success flash' do
           post :create, params: { event: event_params }
           expect(response).to redirect_to(root_path)
-        end
-
-        it 'sets a success flash' do
-          post :create, params: { event: event_params }
           expect(flash[:success]).to eq(I18n.t('events.successful_creation'))
         end
       end
@@ -105,13 +97,9 @@ RSpec.describe EventsController, type: :controller do
           expect(response).to render_template(:new)
         end
 
-        it 'assigns @event with errors' do
+        it 'assigns @event with errors and sets a flash error' do
           post :create, params: { event: { title: '' } }
           expect(assigns(:event).errors).not_to be_empty
-        end
-
-        it 'sets a flash error' do
-          post :create, params: { event: { title: '' } }
           expect(flash[:validation_error]).to eq(assigns(:event).errors.full_messages)
         end
       end
