@@ -13,12 +13,10 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:email) }
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
-    it { should allow_value('John').for(:first_name) }
-    it { should allow_value('123').for(:first_name) }
-    it { should_not allow_value('123').for(:first_name).on(:update) }
-    it { should allow_value('Doe').for(:last_name) }
-    it { should allow_value('456').for(:last_name) }
-    it { should_not allow_value('456').for(:last_name).on(:update) }
+    it { should allow_value('John', '123').for(:first_name) }
+    it { should_not allow_value('123', '!@#').for(:first_name).on(:update) }
+    it { should allow_value('Doe', '456').for(:last_name) }
+    it { should_not allow_value('456', '!@#').for(:last_name).on(:update) }
 
     context "when validating email" do
       subject { create :user, email: "example@test.io" }
@@ -57,6 +55,16 @@ RSpec.describe User, type: :model do
 
       it 'creates a new user' do
         expect { User.from_omniauth(auth) }.to change(User, :count).by(1)
+      end
+    end
+
+    context 'when auth is invalid' do
+      let(:auth) do
+        double('auth')
+      end
+
+      it 'returns nil' do
+        expect(User.from_omniauth(auth)).to eq(nil)
       end
     end
   end

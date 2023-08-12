@@ -18,8 +18,8 @@ RSpec.describe UsersHelper, type: :helper do
     end
 
     context 'when the user does not have an invitation for the event' do
+      let(:result) { helper.invited?(event) }
       it 'returns false' do
-        result = helper.invited?(event)
         expect(result).to be(false)
       end
     end

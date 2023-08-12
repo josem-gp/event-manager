@@ -22,10 +22,12 @@ RSpec.describe HomeController, type: :controller do
     end
 
     context 'when user is not authenticated' do
-      it 'returns a successful response' do
+      it 'returns a successful response and returns nil for the events' do
         get :index
 
         expect(response).to have_http_status(:success)
+        expect(response).to render_template(:index)
+        expect(assigns(:all_events)).to eq(nil)
       end
     end
   end

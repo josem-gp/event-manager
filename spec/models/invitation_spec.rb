@@ -43,17 +43,17 @@ RSpec.describe Invitation, type: :model do
     let(:invitation) { create(:invitation) }
 
     it '#pending?' do
-      expect(invitation.pending?).to be true
+      expect(invitation).to be_pending
     end
 
     it '#accepted?' do
       invitation.accepted!
-      expect(invitation.accepted?).to be true
+      expect(invitation).to be_accepted
     end
 
     it '#denied?' do
       invitation.denied!
-      expect(invitation.denied?).to be true
+      expect(invitation).to be_denied
     end
   end
 
@@ -61,6 +61,7 @@ RSpec.describe Invitation, type: :model do
     let(:invitation) { create(:invitation) }
 
     it 'sets expired attribute to true' do
+      expect(invitation.expired).to be false
       invitation.disable_invitation
       expect(invitation.expired).to be true
     end
