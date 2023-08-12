@@ -50,6 +50,9 @@ docker compose run --rm web rake db:create db:migrate db:seed
 
 This will create a `development` database and seed it with a premade instance of the server we will be using.
 
+**IMPORTANT**
+When running the `seeds` command, you'll be able to view a list of created users and the events to which they've been invited. This provides a convenient way to explore the core functionality of the project for testing purposes.
+
 - Run the container.
 
 ```
@@ -75,6 +78,15 @@ To run the tests we run the following command:
 ```
 docker compose run --rm -e RAILS_ENV=test web bundle exec rspec
 ```
+
+## Future Enhancements
+
+While I've successfully added some tweaks to the logic in the project, there are areas that I've yet to cover due to project priorities and time constraints. Here's a breakdown of what we can consider for future enhancements:
+
+- Role-Based Authorization: Enhance security and control by implementing role-based authorization using the [Pundit](https://github.com/varvet/pundit) gem, ensuring that users have appropriate access levels to different sections of the application.
+- Two-Factor Authentication (2FA): Strengthen user account security by incorporating Two-Factor Authentication, adding an extra layer of protection against unauthorized access.
+- Improved User Experience: Introduce AJAX requests for accepting or rejecting event invitations, creating a smoother and more responsive user experience.
+- Frontend Enhancement: Enhance the frontend design and layout to create a more visually appealing and user-friendly interface.
 
 ## Conclusion and Acknowledgments
 
